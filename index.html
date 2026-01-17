@@ -9,7 +9,7 @@
     
     <title>Jasa Rakit PC Gaming Tangerang (Ciledug) - Hyper Rig Builder</title>
     <meta name="description" content="Spesialis Rakit PC Gaming & Editing Murah di Tangerang. Custom PC sesuai budget (Intel/AMD/Nvidia). Garansi Resmi, Cable Management Rapi. Lokasi Ciledug, Banten.">
-    <meta name="keywords" content="jasa rakit pc tangerang, toko komputer ciledug, rakit pc gaming murah, pc editing video tangerang, service komputer panggilan, rakit pc kantor bsd, upgrade pc gaming, hyper rig tangerang, teknisi komputer ciledug">
+    <meta name="keywords" content="jasa rakit pc tangerang, toko komputer ciledug, rakit pc gaming murah, pc editing video tangerang, service komputer panggilan, rakit pc kantor bsd, upgrade pc gaming, hyper rig tangerang">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="Ciledug Hyper Rig">
     
@@ -21,6 +21,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
@@ -31,7 +32,6 @@
                 extend: {
                     colors: {
                         dark: '#030014',
-                        panel: '#0f0728',
                         primary: '#a855f7',
                         secondary: '#06b6d4',
                         accent: '#ec4899',
@@ -41,14 +41,14 @@
                         display: ['Space Grotesk', 'sans-serif'],
                     },
                     animation: {
-                        'blob': 'blob 10s infinite alternate',
-                        'shimmer': 'shimmer 2s linear infinite',
+                        'blob': 'blob 15s infinite alternate',
+                        'shimmer': 'shimmer 3s linear infinite',
                     },
                     keyframes: {
                         blob: {
                             '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '33%': { transform: 'translate(50px, -50px) scale(1.2)' },
+                            '66%': { transform: 'translate(-30px, 40px) scale(0.8)' },
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         },
                         shimmer: {
@@ -62,91 +62,106 @@
     </script>
 
     <style>
-        body { background-color: #030014; color: #fff; overflow-x: hidden; }
+        body { background-color: #030014; color: #fff; overflow-x: hidden; cursor: default; }
         
-        /* AURA BACKGROUND */
-        .aura-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: #030014; overflow: hidden; }
-        .aura-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: blob 10s infinite alternate; }
-        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #7c3aed; }
-        .blob-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: #db2777; animation-delay: 2s; }
-        .blob-3 { top: 40%; left: 40%; width: 400px; height: 400px; background: #0891b2; animation-delay: 4s; }
+        /* SMOOTH SCROLL RESET */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
 
-        /* GLASSMORPHISM */
+        /* AURA BACKGROUND (LEBIH HALUS) */
+        .aura-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: #030014; }
+        .aura-blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: blob 15s infinite alternate; }
+        .blob-1 { top: -20%; left: -20%; width: 800px; height: 800px; background: #581c87; }
+        .blob-2 { bottom: -20%; right: -20%; width: 800px; height: 800px; background: #be185d; animation-delay: 5s; }
+        .blob-3 { top: 30%; left: 30%; width: 600px; height: 600px; background: #0e7490; animation-delay: 10s; }
+        .noise-overlay { position: absolute; inset: 0; background: url('https://grainy-gradients.vercel.app/noise.svg'); opacity: 0.05; mix-blend-mode: overlay; pointer-events: none; }
+
+        /* PREMIUM GLASSMORPHISM */
         .glass-aura {
-            background: rgba(15, 7, 40, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-aura:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 12px 40px 0 rgba(168, 85, 247, 0.15);
+            transform: translateY(-5px);
         }
 
-        /* --- NEW: LIQUID TEXT ANIMATION (SMOOTH) --- */
+        /* LIQUID TEXT */
         .text-liquid {
-            background: linear-gradient(90deg, #a855f7, #06b6d4, #ec4899, #a855f7);
+            background: linear-gradient(90deg, #c084fc, #22d3ee, #f472b6, #c084fc);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
+            animation: shimmer 4s linear infinite;
         }
 
-        /* --- FIXED: AURA BUTTON (BETTER & CLICKABLE) --- */
+        /* BUTTON AURA (REFINED) */
         .btn-aura {
             position: relative;
-            z-index: 10; /* Ensure clickable */
             display: inline-flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            padding: 1px;
             border-radius: 9999px;
-            padding: 1px; /* Border width */
             background: linear-gradient(90deg, #a855f7, #06b6d4, #ec4899);
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
-            transition: all 0.3s ease;
-            overflow: hidden;
+            box-shadow: 0 0 0 rgba(168, 85, 247, 0);
+            transition: all 0.5s ease;
         }
         .btn-aura:hover {
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
-            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+            transform: scale(1.02);
         }
         .btn-aura-inner {
-            background: #030014; /* Dark Center */
+            background: #050214;
             color: white;
-            width: 100%; height: 100%;
             border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.5s ease;
         }
         .btn-aura:hover .btn-aura-inner {
-            background: transparent; /* Full Gradient on Hover */
-            color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            background: transparent;
         }
 
+        /* CUSTOM SELECTION COLOR */
+        ::selection { background: #a855f7; color: white; }
+        
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
-<body class="antialiased selection:bg-purple-500 selection:text-white">
+<body class="antialiased font-sans">
 
     <div class="aura-bg">
         <div class="aura-blob blob-1"></div>
         <div class="aura-blob blob-2"></div>
         <div class="aura-blob blob-3"></div>
-        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        <div class="noise-overlay"></div>
     </div>
 
-    <nav class="fixed w-full z-50 top-0 left-0 glass-aura border-b border-white/5">
+    <nav class="fixed w-full z-50 top-0 left-0 bg-dark/50 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white text-xl font-bold">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-cyan-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-purple-500/20">
                     <i class="fa-solid fa-microchip"></i>
                 </div>
                 <div class="leading-none">
-                    <div class="font-display font-bold text-lg tracking-wider">CILEDUG<span class="text-liquid">RIG</span></div>
-                    <div class="text-[10px] text-gray-400 tracking-[0.2em] uppercase">Custom PC Builder</div>
+                    <div class="font-display font-bold text-lg tracking-wider text-white">CILEDUG<span class="text-purple-400">RIG</span></div>
+                    <div class="text-[10px] text-gray-400 tracking-[0.2em] uppercase">Premium PC Builder</div>
                 </div>
             </div>
             
             <a href="https://wa.me/6285591636942?text=Halo%20Admin,%20mau%20rakit%20PC." class="btn-aura group">
                 <div class="btn-aura-inner px-6 py-2">
-                    <span class="font-bold text-sm tracking-wide flex items-center gap-2">
+                    <span class="font-bold text-xs md:text-sm tracking-widest flex items-center gap-2">
                         <i class="fa-brands fa-whatsapp"></i> KONSULTASI
                     </span>
                 </div>
@@ -154,25 +169,25 @@
         </div>
     </nav>
 
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden text-center px-6">
+    <section class="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden text-center px-6">
         <div class="max-w-5xl mx-auto relative z-10">
-            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-[0.2em] text-cyan-400 mb-8 glass-aura">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> 
-                LEVEL UP YOUR GAME
+            <div class="gsap-hero opacity-0 translate-y-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-[0.2em] text-cyan-400 mb-8 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> 
+                NEXT GEN GAMING
             </div>
             
-            <h1 class="font-display text-5xl md:text-8xl font-bold leading-tight mb-8">
+            <h1 class="gsap-hero opacity-0 translate-y-10 font-display text-5xl md:text-8xl font-bold leading-tight mb-8">
                 BUILD YOUR <br> 
                 <span class="text-liquid">DREAM MACHINE.</span>
             </h1>
             
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
-                Jasa rakit PC Gaming & Workstation terbaik di Tangerang. 
-                Performansi maksimal, kabel manajemen rapi, dan estetika RGB yang memukau.
+            <p class="gsap-hero opacity-0 translate-y-10 text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+                Rakit PC Gaming impianmu dengan presisi tinggi. 
+                Estetika sempurna, performa tanpa batas.
             </p>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="#builder" class="btn-aura">
+            <div class="gsap-hero opacity-0 translate-y-10 flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#builder" class="btn-aura transform hover:scale-105 transition duration-500">
                     <div class="btn-aura-inner px-10 py-4">
                         <span class="font-bold tracking-widest flex items-center gap-2 text-lg">
                             <i class="fa-solid fa-screwdriver-wrench"></i> RAKIT SEKARANG
@@ -181,73 +196,122 @@
                 </a>
             </div>
             
-            <div class="mt-16 relative w-full max-w-4xl mx-auto">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent z-10"></div>
+            <div class="gsap-hero opacity-0 scale-95 mt-20 relative w-full max-w-5xl mx-auto group">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent z-10 pointer-events-none"></div>
                 <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop" 
-                     class="rounded-xl shadow-2xl shadow-purple-900/40 border border-white/10 w-full transform hover:scale-[1.01] transition duration-700" alt="Rakit PC Gaming Tangerang">
+                     class="rounded-2xl shadow-2xl shadow-purple-900/30 border border-white/10 w-full transition duration-700 group-hover:shadow-purple-900/50" alt="Rakit PC Gaming Tangerang">
             </div>
         </div>
     </section>
 
-    <section class="py-24 relative">
+    <section class="py-32 relative">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-12 border-b border-white/10 pb-6">
-                <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">ULTIMATE <span class="text-purple-500">HARDWARE</span></h2>
-                <p class="text-gray-400">Kami hanya menggunakan komponen original & bergaransi resmi.</p>
+            <div class="mb-16 border-b border-white/5 pb-8 flex flex-col md:flex-row justify-between items-end gap-4">
+                <div>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold mb-2">ULTIMATE <span class="text-purple-500">HARDWARE</span></h2>
+                    <p class="text-gray-400">Komponen kelas atas untuk performa tanpa kompromi.</p>
+                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]">
-                <div class="md:col-span-2 md:row-span-2 glass-aura rounded-2xl p-8 relative overflow-hidden group border border-white/5 hover:border-purple-500/50 transition duration-500">
-                    <div class="relative z-10 h-full flex flex-col justify-end"><div class="text-cyan-400 text-xs font-bold tracking-widest mb-2">GRAPHICS CARD</div><h3 class="font-display text-3xl font-bold text-white mb-2">RTX 40 SERIES</h3><p class="text-gray-400 text-sm">Mainkan game AAA rata kanan dengan Ray Tracing & DLSS 3.0.</p></div>
-                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="VGA RTX 4090"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[300px]">
+                <div class="md:col-span-2 md:row-span-2 glass-aura rounded-3xl p-8 relative overflow-hidden group bento-item">
+                    <div class="relative z-10 h-full flex flex-col justify-end">
+                        <div class="text-cyan-400 text-xs font-bold tracking-widest mb-2 uppercase">Graphics</div>
+                        <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-2 group-hover:text-cyan-300 transition">RTX 40 SERIES</h3>
+                        <p class="text-gray-400 text-sm md:text-base">Ray Tracing & DLSS 3.0 Ready.</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition duration-1000 ease-out" alt="VGA RTX">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent"></div>
                 </div>
-                <div class="md:col-span-2 glass-aura rounded-2xl p-6 relative overflow-hidden group border border-white/5 hover:border-blue-500/50 transition duration-500">
-                    <div class="relative z-10"><div class="text-blue-400 text-xs font-bold tracking-widest mb-1">PROCESSOR</div><h3 class="font-display text-xl font-bold text-white">INTEL CORE & RYZEN</h3></div>
-                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 transition duration-700" alt="Processor Gaming"><div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
+
+                <div class="md:col-span-2 glass-aura rounded-3xl p-8 relative overflow-hidden group bento-item">
+                    <div class="relative z-10">
+                        <div class="text-purple-400 text-xs font-bold tracking-widest mb-2 uppercase">Processor</div>
+                        <h3 class="font-display text-2xl font-bold text-white">INTEL & RYZEN</h3>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-1000 ease-out" alt="CPU">
+                    <div class="absolute inset-0 bg-gradient-to-r from-dark/90 to-transparent"></div>
                 </div>
-                <div class="glass-aura rounded-2xl p-6 relative overflow-hidden group border border-white/5 hover:border-pink-500/50 transition duration-500">
-                    <div class="relative z-10 h-full flex flex-col justify-end"><h3 class="font-display text-xl font-bold text-white">RGB RAM</h3><p class="text-gray-400 text-xs">High Speed DDR4/DDR5.</p></div>
-                    <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="RAM RGB"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+
+                <div class="glass-aura rounded-3xl p-8 relative overflow-hidden group bento-item">
+                    <div class="relative z-10 h-full flex flex-col justify-end">
+                        <h3 class="font-display text-xl font-bold text-white">RGB RAM</h3>
+                        <p class="text-gray-400 text-xs">High Frequency.</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-1000 ease-out" alt="RAM">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
                 </div>
-                <div class="glass-aura rounded-2xl p-6 relative overflow-hidden group border border-white/5 hover:border-cyan-500/50 transition duration-500">
-                    <div class="relative z-10 h-full flex flex-col justify-end"><h3 class="font-display text-xl font-bold text-white">LIQUID COOLING</h3><p class="text-gray-400 text-xs">Temperatur terjaga, performa stabil.</p></div>
-                    <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="PC Water Cooling"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+
+                <div class="glass-aura rounded-3xl p-8 relative overflow-hidden group bento-item">
+                    <div class="relative z-10 h-full flex flex-col justify-end">
+                        <h3 class="font-display text-xl font-bold text-white">AIO COOLING</h3>
+                        <p class="text-gray-400 text-xs">Ice Cold Temp.</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-1000 ease-out" alt="Cooling">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="builder" class="py-24 relative" x-data="pcBuilder()">
-        <div class="max-w-4xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">DREAM RIG <span class="text-liquid">BUILDER</span></h2>
-                <p class="text-gray-400">Dapatkan rekomendasi spesifikasi PC sesuai budget & kebutuhan Anda.</p>
+    <section id="builder" class="py-32 relative" x-data="pcBuilder()">
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-6xl font-bold mb-6">DREAM RIG <span class="text-liquid">BUILDER</span></h2>
+                <p class="text-gray-400 text-lg">Simulasi spesifikasi PC sesuai budget & kebutuhan Anda.</p>
             </div>
-            <div class="glass-aura rounded-2xl p-8 md:p-12 border border-white/10 shadow-[0_0_50px_rgba(168,85,247,0.15)]">
-                <div class="mb-8">
-                    <label class="block text-cyan-400 font-bold text-sm tracking-widest mb-4 uppercase">1. Pilih Range Budget</label>
-                    <div class="grid grid-cols-3 gap-3">
-                        <button @click="budget = 'low'" :class="budget === 'low' ? 'bg-primary/20 border-primary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><div class="text-lg font-bold font-display">ENTRY</div><div class="text-xs opacity-70">3 - 7 Juta</div></button>
-                        <button @click="budget = 'mid'" :class="budget === 'mid' ? 'bg-primary/20 border-primary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><div class="text-lg font-bold font-display">MID</div><div class="text-xs opacity-70">8 - 15 Juta</div></button>
-                        <button @click="budget = 'high'" :class="budget === 'high' ? 'bg-primary/20 border-primary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><div class="text-lg font-bold font-display">HIGH</div><div class="text-xs opacity-70">16 Juta ++</div></button>
-                    </div>
-                </div>
+
+            <div class="glass-aura rounded-3xl p-8 md:p-12 shadow-2xl shadow-purple-900/20">
+                
                 <div class="mb-10">
-                    <label class="block text-cyan-400 font-bold text-sm tracking-widest mb-4 uppercase">2. Penggunaan Utama</label>
-                    <div class="grid grid-cols-3 gap-3">
-                        <button @click="usage = 'office'" :class="usage === 'office' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-briefcase mb-2 text-xl"></i><div class="text-sm font-bold">OFFICE</div></button>
-                        <button @click="usage = 'gaming'" :class="usage === 'gaming' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-gamepad mb-2 text-xl"></i><div class="text-sm font-bold">GAMING</div></button>
-                        <button @click="usage = 'editing'" :class="usage === 'editing' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-video mb-2 text-xl"></i><div class="text-sm font-bold">EDITING</div></button>
+                    <label class="block text-cyan-400 font-bold text-sm tracking-[0.2em] mb-6 uppercase">1. Pilih Range Budget</label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button @click="budget = 'low'" :class="budget === 'low' ? 'bg-purple-600/20 border-purple-500 ring-2 ring-purple-500/20' : 'bg-white/5 border-white/10 hover:border-white/30'" class="p-6 rounded-2xl border transition-all duration-300 text-left group">
+                            <div class="text-2xl font-bold font-display mb-1 text-white">ENTRY</div>
+                            <div class="text-sm text-gray-400 group-hover:text-white">IDR 3 - 7 Juta</div>
+                        </button>
+                        <button @click="budget = 'mid'" :class="budget === 'mid' ? 'bg-purple-600/20 border-purple-500 ring-2 ring-purple-500/20' : 'bg-white/5 border-white/10 hover:border-white/30'" class="p-6 rounded-2xl border transition-all duration-300 text-left group">
+                            <div class="text-2xl font-bold font-display mb-1 text-white">MID</div>
+                            <div class="text-sm text-gray-400 group-hover:text-white">IDR 8 - 15 Juta</div>
+                        </button>
+                        <button @click="budget = 'high'" :class="budget === 'high' ? 'bg-purple-600/20 border-purple-500 ring-2 ring-purple-500/20' : 'bg-white/5 border-white/10 hover:border-white/30'" class="p-6 rounded-2xl border transition-all duration-300 text-left group">
+                            <div class="text-2xl font-bold font-display mb-1 text-white">HIGH</div>
+                            <div class="text-sm text-gray-400 group-hover:text-white">IDR 16 Juta ++</div>
+                        </button>
                     </div>
                 </div>
-                <div class="bg-black/40 rounded-xl p-6 border border-white/10 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-cyan-500"></div>
-                    <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-microchip text-purple-500"></i> REKOMENDASI SPEK:</h3>
-                    <div class="space-y-2 text-sm text-gray-300 font-mono mb-6" x-html="getSpec()"></div>
+
+                <div class="mb-12">
+                    <label class="block text-cyan-400 font-bold text-sm tracking-[0.2em] mb-6 uppercase">2. Penggunaan Utama</label>
+                    <div class="grid grid-cols-3 gap-4">
+                        <button @click="usage = 'office'" :class="usage === 'office' ? 'bg-cyan-600/20 border-cyan-500' : 'bg-white/5 border-white/10'" class="p-4 md:p-6 rounded-2xl border transition-all duration-300 hover:border-white/30 flex flex-col items-center justify-center gap-3">
+                            <i class="fa-solid fa-briefcase text-2xl md:text-3xl text-gray-300"></i>
+                            <div class="text-xs md:text-sm font-bold tracking-widest">OFFICE</div>
+                        </button>
+                        <button @click="usage = 'gaming'" :class="usage === 'gaming' ? 'bg-cyan-600/20 border-cyan-500' : 'bg-white/5 border-white/10'" class="p-4 md:p-6 rounded-2xl border transition-all duration-300 hover:border-white/30 flex flex-col items-center justify-center gap-3">
+                            <i class="fa-solid fa-gamepad text-2xl md:text-3xl text-gray-300"></i>
+                            <div class="text-xs md:text-sm font-bold tracking-widest">GAMING</div>
+                        </button>
+                        <button @click="usage = 'editing'" :class="usage === 'editing' ? 'bg-cyan-600/20 border-cyan-500' : 'bg-white/5 border-white/10'" class="p-4 md:p-6 rounded-2xl border transition-all duration-300 hover:border-white/30 flex flex-col items-center justify-center gap-3">
+                            <i class="fa-solid fa-video text-2xl md:text-3xl text-gray-300"></i>
+                            <div class="text-xs md:text-sm font-bold tracking-widest">EDITING</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-black/60 rounded-2xl p-8 border border-white/10 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-500"></div>
+                    
+                    <h3 class="text-white font-bold mb-6 flex items-center gap-3 text-lg md:text-xl">
+                        <i class="fa-solid fa-microchip text-purple-500"></i> REKOMENDASI SPEK:
+                    </h3>
+                    
+                    <div class="space-y-3 text-sm md:text-base text-gray-300 font-mono mb-8" x-html="getSpec()"></div>
                     
                     <a :href="generateWa()" target="_blank" class="btn-aura w-full">
-                        <div class="btn-aura-inner py-4">
-                            <span class="font-bold tracking-widest flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-xl"></i> KONSULTASI SPEK INI
+                        <div class="btn-aura-inner py-4 md:py-5 bg-gradient-to-r from-purple-900/50 to-pink-900/50">
+                            <span class="font-bold tracking-[0.15em] flex items-center justify-center gap-3 text-sm md:text-base">
+                                <i class="fa-brands fa-whatsapp text-xl"></i> KONSULTASI GRATIS
                             </span>
                         </div>
                     </a>
@@ -256,58 +320,107 @@
         </div>
     </section>
 
-    <section class="py-20 border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-xl font-bold mb-8 text-center text-gray-500 font-display">FAQ & SERVICES</h2>
+    <section class="py-24 border-t border-white/5 bg-black/20">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-10 text-center text-gray-500 font-display">FAQ</h2>
             <div class="space-y-4">
-                <details class="group bg-white/5 rounded border border-white/5 overflow-hidden"><summary class="p-6 font-bold text-gray-400 cursor-pointer hover:text-white transition flex justify-between">Jasa Rakit PC Gaming Murah di Tangerang & Ciledug<i class="fa-solid fa-chevron-down text-gray-600 group-open:rotate-180 transition"></i></summary><div class="p-6 pt-0 text-gray-500 text-sm leading-relaxed mt-2 border-t border-white/5"><p class="mb-3">Ingin punya PC impian tapi bingung rakitnya? <strong>Ciledug Hyper Rig</strong> menyediakan <strong>jasa rakit PC gaming Tangerang</strong> yang terpercaya dan profesional.</p></div></details>
-                <details class="group bg-white/5 rounded border border-white/5 overflow-hidden"><summary class="p-6 font-bold text-gray-400 cursor-pointer hover:text-white transition flex justify-between">Paket PC Kantor & Maintenance Komputer B2B<i class="fa-solid fa-chevron-down text-gray-600 group-open:rotate-180 transition"></i></summary><div class="p-6 pt-0 text-gray-500 text-sm leading-relaxed mt-2 border-t border-white/5"><p>Selain personal, kami juga melayani <strong>pengadaan komputer kantor (B2B)</strong> untuk perusahaan, sekolah, dan UMKM di Tangerang.</p></div></details>
+                <details class="group bg-white/5 rounded-xl border border-white/5 overflow-hidden transition-all duration-300 open:bg-white/10">
+                    <summary class="p-6 font-bold text-gray-300 cursor-pointer hover:text-white transition flex justify-between items-center">
+                        <span>Jasa Rakit PC Gaming Murah di Tangerang & Ciledug</span>
+                        <i class="fa-solid fa-chevron-down text-gray-500 group-open:rotate-180 transition-transform duration-300"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-400 text-sm leading-relaxed mt-2 border-t border-white/5">
+                        <p class="mb-3">Ingin punya PC impian tapi bingung rakitnya? <strong>Ciledug Hyper Rig</strong> menyediakan <strong>jasa rakit PC gaming Tangerang</strong> yang terpercaya dan profesional.</p>
+                    </div>
+                </details>
+                <details class="group bg-white/5 rounded-xl border border-white/5 overflow-hidden transition-all duration-300 open:bg-white/10">
+                    <summary class="p-6 font-bold text-gray-300 cursor-pointer hover:text-white transition flex justify-between items-center">
+                        <span>Paket PC Kantor & Maintenance Komputer B2B</span>
+                        <i class="fa-solid fa-chevron-down text-gray-500 group-open:rotate-180 transition-transform duration-300"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-400 text-sm leading-relaxed mt-2 border-t border-white/5">
+                        <p>Selain personal, kami juga melayani <strong>pengadaan komputer kantor (B2B)</strong> untuk perusahaan, sekolah, dan UMKM di Tangerang.</p>
+                    </div>
+                </details>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black pt-16 pb-8 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-            <div>
-                <h2 class="font-display text-2xl font-bold mb-6 text-white">CILEDUG<span class="text-liquid">RIG</span></h2>
-                <div class="space-y-4 text-gray-500 text-sm">
-                    <p>Build your legacy with us. High performance custom PC builder based in Tangerang.</p>
-                    <div class="flex items-center gap-3"><i class="fa-brands fa-whatsapp text-green-500"></i> 0855-9163-6942</div>
-                    <div class="flex items-start gap-3"><i class="fa-solid fa-location-dot text-purple-500 mt-1"></i> Ciledug, Tangerang, Banten.</div>
-                </div>
+    <footer class="bg-black pt-20 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="font-display text-3xl font-bold mb-6 text-white">CILEDUG<span class="text-liquid">RIG</span></h2>
+            <p class="text-gray-500 text-sm mb-8">Build your legacy with us. High performance custom PC builder based in Tangerang.</p>
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-whatsapp text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-solid fa-map-location text-xl"></i></a>
             </div>
-            <div class="h-[200px] rounded-lg overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition duration-500 opacity-60 hover:opacity-100">
-                <iframe src="https://maps.app.goo.gl/CvECMXuKzRHfNyUj7 " width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+            <p class="text-gray-700 text-xs">© 2026 Ciledug Hyper Rig. Powered by Aura Protocol.</p>
         </div>
-        <div class="text-center border-t border-white/5 pt-8"><p class="text-gray-600 text-xs">© 2026 Ciledug Hyper Rig. Aura Protocol Active.</p></div>
     </footer>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-        // SMOOTH ENTRANCE
-        gsap.from("h1", { opacity: 0, y: 50, duration: 1.2, ease: "power2.out", delay: 0.1 });
+        // 1. LENIS SMOOTH SCROLL (The Secret Sauce)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential Out
+            direction: 'vertical',
+            smooth: true,
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
 
-        // Builder Logic
+        // 2. GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Hero Entrance (Staggered)
+        const tl = gsap.timeline();
+        tl.to(".gsap-hero", {
+            y: 0, opacity: 1, duration: 1.5, stagger: 0.2, ease: "power3.out"
+        });
+
+        // Bento Grid Entrance
+        gsap.utils.toArray('.bento-item').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: { trigger: item, start: "top 85%" },
+                y: 100, opacity: 0, duration: 1, ease: "expo.out", delay: i * 0.1
+            });
+        });
+
+        // 3. PC BUILDER LOGIC
         function pcBuilder() {
             return {
                 budget: 'mid', usage: 'gaming',
                 getSpec() {
-                    let cpu, gpu, ram;
+                    let cpu, gpu, ram, psu;
                     if (this.budget === 'low') {
                         cpu = (this.usage === 'gaming') ? "Core i3-12100F / Ryzen 3 4100" : "Core i3-10105 / Ryzen 3 3200G";
-                        gpu = (this.usage === 'gaming') ? "GTX 1650 4GB" : "Integrated Graphics";
-                        ram = "8GB DDR4 (2x4)";
+                        gpu = (this.usage === 'gaming') ? "GTX 1650 4GB GDDR6" : "Vega Integrated Graphics";
+                        ram = "8GB (2x4) DDR4 3200MHz";
+                        psu = "450W 80+ Bronze";
                     } else if (this.budget === 'mid') {
                         cpu = "Core i5-12400F / Ryzen 5 5600";
-                        gpu = (this.usage === 'gaming') ? "RTX 3060 / RX 6600" : "GTX 1650"; if(this.usage === 'editing') gpu = "RTX 3060 12GB";
-                        ram = "16GB DDR4 (2x8)";
+                        gpu = (this.usage === 'gaming') ? "RTX 3060 12GB / RX 6600" : "GTX 1650 (Office Heavy)"; 
+                        if(this.usage === 'editing') gpu = "RTX 3060 12GB (VRAM Besar)";
+                        ram = "16GB (2x8) DDR4 3200MHz RGB";
+                        psu = "550W 80+ Bronze Certified";
                     } else {
                         cpu = "Core i7-13700F / Ryzen 7 7700X";
-                        gpu = "RTX 4070 / RTX 4080 Super";
-                        ram = "32GB DDR5 (2x16) RGB";
+                        gpu = "RTX 4070 / 4080 Super";
+                        ram = "32GB (2x16) DDR5 6000MHz RGB";
+                        psu = "750W 80+ Gold Modular";
                     }
-                    return `<ul class="space-y-2"><li><span class="text-purple-400 font-bold">CPU:</span> ${cpu}</li><li><span class="text-cyan-400 font-bold">VGA:</span> ${gpu}</li><li><span class="text-pink-400 font-bold">RAM:</span> ${ram}</li><li><span class="text-gray-400">SSD:</span> 256GB / 512GB NVMe</li><li><span class="text-gray-400">PSU:</span> 550W - 750W 80+ Bronze/Gold</li></ul>`;
+                    return `
+                        <ul class="space-y-3">
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span class="text-purple-400 font-bold">CPU</span> <span>${cpu}</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span class="text-cyan-400 font-bold">VGA</span> <span>${gpu}</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span class="text-pink-400 font-bold">RAM</span> <span>${ram}</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span class="text-gray-400 font-bold">SSD</span> <span>NVMe M.2 512GB / 1TB</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span class="text-gray-400 font-bold">PSU</span> <span>${psu}</span></li>
+                        </ul>`;
                 },
                 generateWa() { return `https://wa.me/6285591636942?text=Halo%20Admin%20Hyper%20Rig,%20mau%20konsultasi%20PC%20Budget%20${this.budget.toUpperCase()}%20untuk%20${this.usage.toUpperCase()}`; }
             }
