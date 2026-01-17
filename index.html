@@ -12,47 +12,16 @@
     <meta name="keywords" content="jasa rakit pc tangerang, toko komputer ciledug, rakit pc gaming murah, pc editing video tangerang, service komputer panggilan, rakit pc kantor bsd, upgrade pc gaming, hyper rig tangerang, teknisi komputer ciledug">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="Ciledug Hyper Rig">
-    <meta name="language" content="Indonesian">
-    <meta name="geo.region" content="ID-BT" />
-    <meta name="geo.placename" content="Tangerang" />
-    <meta name="geo.position" content="-6.2241;106.7088" />
-    <meta name="ICBM" content="-6.2241, 106.7088" />
     
     <link rel="canonical" href="https://ciledug-hyper-rig.vercel.app">
-    
-    <meta property="og:type" content="business.business">
-    <meta property="og:url" content="https://ciledug-hyper-rig.vercel.app">
-    <meta property="og:title" content="Rakit PC Impian - Ciledug Hyper Rig">
-    <meta property="og:description" content="Build Your Dream Machine. Jasa Rakit PC Gaming & Workstation Terbaik di Tangerang. Konsultasi Gratis!">
     <meta property="og:image" content="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop">
-
-    <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "ComputerStore",
-        "name": "Ciledug Hyper Rig",
-        "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop",
-        "telephone": "+62-855-9163-6942",
-        "url": "https://ciledug-hyper-rig.vercel.app",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Ciledug",
-          "addressLocality": "Tangerang",
-          "addressRegion": "Banten",
-          "addressCountry": "ID"
-        },
-        "priceRange": "$$"
-      }
-    ]
-    </script>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖥️</text></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typewriter-effect@latest/dist/core.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -72,9 +41,8 @@
                         display: ['Space Grotesk', 'sans-serif'],
                     },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
                         'blob': 'blob 10s infinite alternate',
-                        'spin-slow': 'spin 4s linear infinite', // Untuk Tombol Aura
+                        'shimmer': 'shimmer 2s linear infinite',
                     },
                     keyframes: {
                         blob: {
@@ -82,6 +50,10 @@
                             '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
                             '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '200% 0' },
+                            '100%': { backgroundPosition: '-200% 0' }
                         }
                     }
                 }
@@ -92,14 +64,10 @@
     <style>
         body { background-color: #030014; color: #fff; overflow-x: hidden; }
         
-        /* AURA MESH BG */
-        .aura-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: #030014; overflow: hidden;
-        }
-        .aura-blob {
-            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: blob 10s infinite alternate;
-        }
-        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #7c3aed; animation-delay: 0s; }
+        /* AURA BACKGROUND */
+        .aura-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: #030014; overflow: hidden; }
+        .aura-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: blob 10s infinite alternate; }
+        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #7c3aed; }
         .blob-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: #db2777; animation-delay: 2s; }
         .blob-3 { top: 40%; left: 40%; width: 400px; height: 400px; background: #0891b2; animation-delay: 4s; }
 
@@ -108,85 +76,49 @@
             background: rgba(15, 7, 40, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- NEW: AURA SHIMMER BUTTON (Ref: 695E9B4) --- */
+        /* --- NEW: LIQUID TEXT ANIMATION (SMOOTH) --- */
+        .text-liquid {
+            background: linear-gradient(90deg, #a855f7, #06b6d4, #ec4899, #a855f7);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* --- FIXED: AURA BUTTON (BETTER & CLICKABLE) --- */
         .btn-aura {
             position: relative;
-            background: transparent;
-            z-index: 0;
-            overflow: hidden;
+            z-index: 10; /* Ensure clickable */
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 2px; /* Ketebalan border */
-            border-radius: 9999px; /* Full Rounded */
+            border-radius: 9999px;
+            padding: 1px; /* Border width */
+            background: linear-gradient(90deg, #a855f7, #06b6d4, #ec4899);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
-        .btn-aura::before {
-            content: '';
-            position: absolute;
-            width: 200%; height: 200%;
-            background: conic-gradient(transparent, #a855f7, #06b6d4, #ec4899, transparent 30%);
-            animation: spin 3s linear infinite;
-            z-index: -1;
-            top: -50%; left: -50%;
-        }
-        .btn-aura:hover::before {
-            animation: spin 1.5s linear infinite; /* Lebih cepat saat hover */
-            background: conic-gradient(transparent, #fff, #a855f7, #fff, transparent 30%); /* Jadi putih saat hover */
+        .btn-aura:hover {
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            transform: scale(1.05);
         }
         .btn-aura-inner {
-            background: rgba(3, 0, 20, 0.9); /* Dark background inner */
+            background: #030014; /* Dark Center */
+            color: white;
             width: 100%; height: 100%;
+            border-radius: 9999px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1;
-            border-radius: 9999px;
             transition: background 0.3s;
         }
         .btn-aura:hover .btn-aura-inner {
-            background: rgba(168, 85, 247, 0.2); /* Sedikit ungu saat hover */
-        }
-
-        /* --- NEW: GLITCH TEXT EFFECT --- */
-        .glitch-text {
-            position: relative;
+            background: transparent; /* Full Gradient on Hover */
             color: white;
-            mix-blend-mode: lighten;
-        }
-        .glitch-text::before, .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; width: 100%; background: #030014;
-            clip: rect(0, 0, 0, 0);
-        }
-        .glitch-text::before {
-            left: -2px; text-shadow: 2px 0 #06b6d4; /* Cyan shift */
-            animation: glitch-anim-1 2s infinite linear alternate-reverse;
-        }
-        .glitch-text::after {
-            left: 2px; text-shadow: -2px 0 #ec4899; /* Pink shift */
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-anim-1 {
-            0% { clip: rect(20px, 9999px, 15px, 0); }
-            20% { clip: rect(60px, 9999px, 70px, 0); }
-            40% { clip: rect(20px, 9999px, 15px, 0); }
-            60% { clip: rect(80px, 9999px, 90px, 0); }
-            80% { clip: rect(10px, 9999px, 50px, 0); }
-            100% { clip: rect(40px, 9999px, 30px, 0); }
-        }
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(80px, 9999px, 90px, 0); }
-            20% { clip: rect(10px, 9999px, 50px, 0); }
-            40% { clip: rect(40px, 9999px, 30px, 0); }
-            60% { clip: rect(20px, 9999px, 15px, 0); }
-            80% { clip: rect(60px, 9999px, 70px, 0); }
-            100% { clip: rect(30px, 9999px, 10px, 0); }
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* Text Gradient */
-        .text-rgb { background: linear-gradient(to right, #a855f7, #06b6d4, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
     </style>
@@ -203,18 +135,18 @@
     <nav class="fixed w-full z-50 top-0 left-0 glass-aura border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white text-xl font-bold animate-pulse">
+                <div class="w-10 h-10 rounded bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white text-xl font-bold">
                     <i class="fa-solid fa-microchip"></i>
                 </div>
                 <div class="leading-none">
-                    <div class="font-display font-bold text-lg tracking-wider">CILEDUG<span class="text-rgb">RIG</span></div>
+                    <div class="font-display font-bold text-lg tracking-wider">CILEDUG<span class="text-liquid">RIG</span></div>
                     <div class="text-[10px] text-gray-400 tracking-[0.2em] uppercase">Custom PC Builder</div>
                 </div>
             </div>
             
             <a href="https://wa.me/6285591636942?text=Halo%20Admin,%20mau%20rakit%20PC." class="btn-aura group">
                 <div class="btn-aura-inner px-6 py-2">
-                    <span class="text-gray-300 font-bold text-sm tracking-wide group-hover:text-white flex items-center gap-2 transition-colors">
+                    <span class="font-bold text-sm tracking-wide flex items-center gap-2">
                         <i class="fa-brands fa-whatsapp"></i> KONSULTASI
                     </span>
                 </div>
@@ -229,8 +161,9 @@
                 LEVEL UP YOUR GAME
             </div>
             
-            <h1 class="font-display text-5xl md:text-8xl font-bold leading-tight mb-8 min-h-[180px] flex flex-col justify-center">
-                <span id="typewriter-text"></span>
+            <h1 class="font-display text-5xl md:text-8xl font-bold leading-tight mb-8">
+                BUILD YOUR <br> 
+                <span class="text-liquid">DREAM MACHINE.</span>
             </h1>
             
             <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
@@ -239,9 +172,9 @@
             </p>
 
             <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="#builder" class="btn-aura group">
-                    <div class="btn-aura-inner px-10 py-4 bg-primary/20">
-                        <span class="text-white font-bold tracking-widest flex items-center gap-2">
+                <a href="#builder" class="btn-aura">
+                    <div class="btn-aura-inner px-10 py-4">
+                        <span class="font-bold tracking-widest flex items-center gap-2 text-lg">
                             <i class="fa-solid fa-screwdriver-wrench"></i> RAKIT SEKARANG
                         </span>
                     </div>
@@ -251,7 +184,7 @@
             <div class="mt-16 relative w-full max-w-4xl mx-auto">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent z-10"></div>
                 <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop" 
-                     class="rounded-xl shadow-2xl shadow-purple-900/40 border border-white/10 w-full" alt="Rakit PC Gaming Tangerang">
+                     class="rounded-xl shadow-2xl shadow-purple-900/40 border border-white/10 w-full transform hover:scale-[1.01] transition duration-700" alt="Rakit PC Gaming Tangerang">
             </div>
         </div>
     </section>
@@ -265,19 +198,19 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]">
                 <div class="md:col-span-2 md:row-span-2 glass-aura rounded-2xl p-8 relative overflow-hidden group border border-white/5 hover:border-purple-500/50 transition duration-500">
                     <div class="relative z-10 h-full flex flex-col justify-end"><div class="text-cyan-400 text-xs font-bold tracking-widest mb-2">GRAPHICS CARD</div><h3 class="font-display text-3xl font-bold text-white mb-2">RTX 40 SERIES</h3><p class="text-gray-400 text-sm">Mainkan game AAA rata kanan dengan Ray Tracing & DLSS 3.0.</p></div>
-                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800&auto=format&fit=crop" onerror="this.src='https://placehold.co/800x800/1e1e1e/a855f7?text=GPU+RTX';" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="VGA RTX 4090"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="VGA RTX 4090"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
                 </div>
                 <div class="md:col-span-2 glass-aura rounded-2xl p-6 relative overflow-hidden group border border-white/5 hover:border-blue-500/50 transition duration-500">
                     <div class="relative z-10"><div class="text-blue-400 text-xs font-bold tracking-widest mb-1">PROCESSOR</div><h3 class="font-display text-xl font-bold text-white">INTEL CORE & RYZEN</h3></div>
-                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600&auto=format&fit=crop" onerror="this.src='https://placehold.co/600x400/1e1e1e/3b82f6?text=CPU+INTEL+AMD';" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 transition duration-700" alt="Processor Gaming"><div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 transition duration-700" alt="Processor Gaming"><div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
                 </div>
                 <div class="glass-aura rounded-2xl p-6 relative overflow-hidden group border border-white/5 hover:border-pink-500/50 transition duration-500">
                     <div class="relative z-10 h-full flex flex-col justify-end"><h3 class="font-display text-xl font-bold text-white">RGB RAM</h3><p class="text-gray-400 text-xs">High Speed DDR4/DDR5.</p></div>
-                    <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=600&auto=format&fit=crop" onerror="this.src='https://placehold.co/600x400/1e1e1e/ec4899?text=RAM+RGB';" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="RAM RGB"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+                    <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="RAM RGB"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
                 </div>
                 <div class="glass-aura rounded-2xl p-6 relative overflow-hidden group border border-white/5 hover:border-cyan-500/50 transition duration-500">
                     <div class="relative z-10 h-full flex flex-col justify-end"><h3 class="font-display text-xl font-bold text-white">LIQUID COOLING</h3><p class="text-gray-400 text-xs">Temperatur terjaga, performa stabil.</p></div>
-                    <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?q=80&w=600&auto=format&fit=crop" onerror="this.src='https://placehold.co/600x400/1e1e1e/06b6d4?text=LIQUID+COOLING';" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="PC Water Cooling"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+                    <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-700" alt="PC Water Cooling"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
                 </div>
             </div>
         </div>
@@ -286,7 +219,7 @@
     <section id="builder" class="py-24 relative" x-data="pcBuilder()">
         <div class="max-w-4xl mx-auto px-6 relative z-10">
             <div class="text-center mb-12">
-                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">DREAM RIG <span class="text-rgb">BUILDER</span></h2>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">DREAM RIG <span class="text-liquid">BUILDER</span></h2>
                 <p class="text-gray-400">Dapatkan rekomendasi spesifikasi PC sesuai budget & kebutuhan Anda.</p>
             </div>
             <div class="glass-aura rounded-2xl p-8 md:p-12 border border-white/10 shadow-[0_0_50px_rgba(168,85,247,0.15)]">
@@ -301,18 +234,19 @@
                 <div class="mb-10">
                     <label class="block text-cyan-400 font-bold text-sm tracking-widest mb-4 uppercase">2. Penggunaan Utama</label>
                     <div class="grid grid-cols-3 gap-3">
-                        <button @click="usage = 'office'" :class="usage === 'office' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-briefcase mb-2 text-xl"></i><div class="text-sm font-bold">OFFICE / SCHOOL</div></button>
+                        <button @click="usage = 'office'" :class="usage === 'office' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-briefcase mb-2 text-xl"></i><div class="text-sm font-bold">OFFICE</div></button>
                         <button @click="usage = 'gaming'" :class="usage === 'gaming' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-gamepad mb-2 text-xl"></i><div class="text-sm font-bold">GAMING</div></button>
-                        <button @click="usage = 'editing'" :class="usage === 'editing' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-video mb-2 text-xl"></i><div class="text-sm font-bold">EDITING / 3D</div></button>
+                        <button @click="usage = 'editing'" :class="usage === 'editing' ? 'bg-secondary/20 border-secondary text-white' : 'bg-white/5 border-white/10 text-gray-500'" class="p-4 rounded-xl border transition hover:border-white/30"><i class="fa-solid fa-video mb-2 text-xl"></i><div class="text-sm font-bold">EDITING</div></button>
                     </div>
                 </div>
                 <div class="bg-black/40 rounded-xl p-6 border border-white/10 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-cyan-500"></div>
                     <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-microchip text-purple-500"></i> REKOMENDASI SPEK:</h3>
                     <div class="space-y-2 text-sm text-gray-300 font-mono mb-6" x-html="getSpec()"></div>
-                    <a :href="generateWa()" target="_blank" class="btn-aura w-full group">
-                        <div class="btn-aura-inner py-4 bg-primary/20">
-                            <span class="text-white font-bold tracking-widest flex items-center justify-center gap-2">
+                    
+                    <a :href="generateWa()" target="_blank" class="btn-aura w-full">
+                        <div class="btn-aura-inner py-4">
+                            <span class="font-bold tracking-widest flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp text-xl"></i> KONSULTASI SPEK INI
                             </span>
                         </div>
@@ -335,7 +269,7 @@
     <footer class="bg-black pt-16 pb-8 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
             <div>
-                <h2 class="font-display text-2xl font-bold mb-6 text-white">CILEDUG<span class="text-rgb">RIG</span></h2>
+                <h2 class="font-display text-2xl font-bold mb-6 text-white">CILEDUG<span class="text-liquid">RIG</span></h2>
                 <div class="space-y-4 text-gray-500 text-sm">
                     <p>Build your legacy with us. High performance custom PC builder based in Tangerang.</p>
                     <div class="flex items-center gap-3"><i class="fa-brands fa-whatsapp text-green-500"></i> 0855-9163-6942</div>
@@ -343,7 +277,7 @@
                 </div>
             </div>
             <div class="h-[200px] rounded-lg overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition duration-500 opacity-60 hover:opacity-100">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15864.716909516854!2d106.704859!3d-6.24009405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88ed343af45fc195%3A0x98e5b8eaad8e2564!2sCiledugPromo.biz.id%20%7C%20Layanan%20Bisnis%20%26%20Pemasaran!5e0!3m2!1sid!2sid!4v1768642599691!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://maps.app.goo.gl/CvECMXuKzRHfNyUj7 " width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
         <div class="text-center border-t border-white/5 pt-8"><p class="text-gray-600 text-xs">© 2026 Ciledug Hyper Rig. Aura Protocol Active.</p></div>
@@ -351,21 +285,10 @@
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
+        // SMOOTH ENTRANCE
+        gsap.from("h1", { opacity: 0, y: 50, duration: 1.2, ease: "power2.out", delay: 0.1 });
 
-        // --- NEW: TYPEWRITER + GLITCH ANIMATION ---
-        const typewriter = new Typewriter('#typewriter-text', {
-            loop: false,
-            delay: 75,
-        });
-
-        typewriter
-            .typeString('BUILD YOUR <br>')
-            .pauseFor(500)
-            // Teks "DREAM MACHINE" dibungkus span glitch
-            .typeString('<span class="text-rgb glitch-text" data-text="DREAM MACHINE">DREAM MACHINE.</span>')
-            .start();
-
-        // Builder Logic (Same as before)
+        // Builder Logic
         function pcBuilder() {
             return {
                 budget: 'mid', usage: 'gaming',
@@ -373,7 +296,7 @@
                     let cpu, gpu, ram;
                     if (this.budget === 'low') {
                         cpu = (this.usage === 'gaming') ? "Core i3-12100F / Ryzen 3 4100" : "Core i3-10105 / Ryzen 3 3200G";
-                        gpu = (this.usage === 'gaming') ? "GTX 1650 4GB" : "Integrated Graphics (Hemat)";
+                        gpu = (this.usage === 'gaming') ? "GTX 1650 4GB" : "Integrated Graphics";
                         ram = "8GB DDR4 (2x4)";
                     } else if (this.budget === 'mid') {
                         cpu = "Core i5-12400F / Ryzen 5 5600";
